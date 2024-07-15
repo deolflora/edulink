@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "780608048767",
+    "project_id": "edulink-auth",
+    "storage_bucket": "edulink-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780608048767:android:b33cbdfa4a8424051a394a",
+        "android_client_info": {
+          "package_name": "com.edulink.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAne9hMYci2DCgDqJGZ8rG2ulzDZoVlql4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780608048767:android:e0f66f75956d90241a394a",
+        "android_client_info": {
+          "package_name": "com.firebase.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAne9hMYci2DCgDqJGZ8rG2ulzDZoVlql4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
