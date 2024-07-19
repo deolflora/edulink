@@ -21,11 +21,11 @@ class _SplashState extends State<Splash> {
   }
 
   Future<void> _showSplashScreen() async {
-    await Future.delayed(const Duration(milliseconds: 960), () {});
+    await Future.delayed(const Duration(milliseconds: 1000), () {});
   }
 
   Future<void> checkAuth() async {
-    String url = 'https://802b-103-107-92-82.ngrok-free.app/home_page';
+    String url = 'https://d10c-103-103-56-94.ngrok-free.app/home_page';
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('access_token');
     if (token == null) {

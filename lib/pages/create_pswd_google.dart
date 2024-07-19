@@ -1,12 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/googleSignIn.dart';
 import 'package:flutter_app/pages/home_page.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'login_page.dart';
 import 'my_TextField.dart';
 import 'my_button.dart';
 
@@ -35,7 +32,7 @@ class _CreatePasswordState extends State<CreatePassword> {
     try {
       final prefs = await SharedPreferences.getInstance();
       Response response = await post(
-        Uri.parse('https://802b-103-107-92-82.ngrok-free.app/set_password'),
+        Uri.parse('https://d10c-103-103-56-94.ngrok-free.app/set_password'),
         headers: {'Content-Type': 'application/json','Authorization': 'Bearer ${widget.token}'},
         body: jsonEncode({
           "password": password,

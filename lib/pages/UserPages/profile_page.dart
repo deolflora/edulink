@@ -1,10 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/auth_helper.dart';
 import 'package:flutter_app/pages/change_avatar.dart';
-import 'package:flutter_app/pages/login_page.dart';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../profile_info.dart';
@@ -17,7 +16,7 @@ class Profile {
   final String name;
 
   Profile({
-    required this.profile_about, required this.courses, required this.email,required this.profile_picture, required this.name
+    required this.profile_about, required this.courses,required this.email,required this.profile_picture, required this.name
   });
   factory Profile.fromJson(Map<String, dynamic> json) {
     return Profile(
@@ -135,12 +134,16 @@ class _UserProfileState extends State<UserProfile> {
                       children: [
                         Stack(
                           children: [
-                            const SizedBox(width: 100,),
+                            const SizedBox(width: 50,),
                             Container(
                               padding: const EdgeInsets.symmetric(vertical: 20),
                               height: 240,
-                              width: 250,
-                              child:  Image.asset(profile.profile_picture, scale: 1,),
+                              width: 210,
+                              child: ClipOval(
+                                child: profilePicturePath != null
+                                    ? Image.file(File(profilePicturePath!),fit: BoxFit.cover,width: 0,height: 5,)
+                                    : Image.asset(profile.profile_picture, scale: 1,fit:BoxFit.cover),
+                              ),
                        ),
                             Positioned(
                               height: 90,
@@ -191,7 +194,7 @@ class _UserProfileState extends State<UserProfile> {
                               child: Text('Courses Completed',style: TextStyle(fontFamily: 'Garamond',fontWeight: FontWeight.bold,fontSize: 16,color: Colors.grey[600]))),
                         ),
                         Container(
-                          height: 100,
+                          height: 150,
                           child: ListView.builder(
                             shrinkWrap: true,
                               itemCount: profile.courses.length,
@@ -201,8 +204,8 @@ class _UserProfileState extends State<UserProfile> {
                               );
                               }
                             ),
-
                         ),
+                        const SizedBox(height: 10,),
                       ],
                     );
                   } else {

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_app/pages/forgot_pswd.dart';
 import 'package:flutter_app/pages/googleSignIn.dart';
 import 'package:http/http.dart';
 import 'package:flutter/cupertino.dart';
@@ -47,15 +48,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> signUserIn(String email, String password) async {
-    showDialog(context: context, builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-            );
-          },
+    showDialog(barrierDismissible: false, context: context, builder: (context) {
+      return Center(
+        child: CircularProgressIndicator(backgroundColor: Colors.red[400],color: Colors.black,),
+        );
+      },
     );
     try {
       Response response = await post(
-        Uri.parse('https://802b-103-107-92-82.ngrok-free.app/login'),
+        Uri.parse('https://d10c-103-103-56-94.ngrok-free.app/login'),
           headers : {"Content-Type": "application/json"},
         body : jsonEncode({
           "email": email,
@@ -86,7 +87,6 @@ class _LoginPageState extends State<LoginPage> {
           if (mounted) {
             Navigator.pop(context);
           }
-          //showErrorMessage(e.toString());
       print(e.toString());
     }
   }
@@ -127,9 +127,6 @@ class _LoginPageState extends State<LoginPage> {
                       obscureText: false,
                     ),
                   ),
-                  //Username
-
-                  //password
                   const SizedBox(height: 10,),
                   MyTextField(
                     controller: passwordController,
@@ -143,8 +140,11 @@ class _LoginPageState extends State<LoginPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text("Forgot Password?",
-                          style: TextStyle(color: Colors.grey.shade700),),
+                        GestureDetector(
+                          onTap: () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ForgotPswd()));},
+                          child: Text("Forgot Password?",
+                               style: TextStyle(color: Colors.grey.shade700),),
+                        ),
                       ],
                     ),
                   ),

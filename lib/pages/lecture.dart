@@ -1,4 +1,3 @@
-
 class Lecture {
   final String course_id;
   final String title;

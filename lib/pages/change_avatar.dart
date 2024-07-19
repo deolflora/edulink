@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -25,7 +26,7 @@ class _ChangeAvatarState extends State<ChangeAvatar> {
   ];
 
   Future<void> updateAvatar(String selectedAvatar) async {
-    String url = 'https://802b-103-107-92-82.ngrok-free.app/profile';
+    String url = 'https://d10c-103-103-56-94.ngrok-free.app/profile';
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('access_token');
 
@@ -51,21 +52,60 @@ class _ChangeAvatarState extends State<ChangeAvatar> {
   Future<void> pickImageFromGallery() async {
     final returnImage = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (returnImage == null) return;
-    setState(() {
-      selectedImage = File(returnImage.path);
-      _image = File(returnImage.path).readAsBytesSync();
-    });
-    Navigator.of(context).pop;
+    File selectedImage = File(returnImage.path);
+    File? localImage = await saveImageToLocalDirectory(selectedImage);
+    if (localImage != null) {
+      setState(() {
+        selectedImage = localImage;
+        if (localImage != null) {
+          setState(() {
+            selectedImage = localImage;
+            _image = localImage.readAsBytesSync();
+          });
+        _image = File(returnImage.path).readAsBytesSync();
+      }});
+      await updateAvatar(localImage.path);
+      await saveImagePath(localImage.path);
+      Navigator.pop(context,true);
+      }
   }
 
   Future<void> pickImageFromCamera() async {
     final returnImage = await ImagePicker().pickImage(source: ImageSource.camera);
     if (returnImage == null) return;
-    setState(() {
-      selectedImage = File(returnImage.path);
-      _image = File(returnImage.path).readAsBytesSync();
-    });
-    Navigator.of(context).pop;
+    File selectedImage = File(returnImage.path);
+    File? localImage = await saveImageToLocalDirectory(selectedImage);
+    if (localImage != null) {
+      setState(() {
+        selectedImage = localImage;
+        selectedImage = localImage;
+        _image = localImage.readAsBytesSync();
+      });
+      await updateAvatar(localImage.path);
+      await saveImagePath(localImage.path);
+      Navigator.pop(context,true);
+    }
+  }
+
+  Future<File?> saveImageToLocalDirectory(File image) async {
+    try {
+      final directory = await getApplicationDocumentsDirectory();
+      String path = '${directory.path}/${DateTime.now().millisecondsSinceEpoch}.png';
+      return await image.copy(path);
+    } catch (e) {
+      print('Error saving image to local directory: $e');
+      return null;
+    }
+  }
+
+  Future<void> saveImagePath(String path) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('saved_image_path', path);
+  }
+
+  Future<String?> getImagePath() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('saved_image_path');
   }
 
   @override

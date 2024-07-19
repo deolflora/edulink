@@ -3,11 +3,10 @@ import 'package:flutter_app/pages/auth_helper.dart';
 import 'package:flutter_app/pages/lecture.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<List<Lecture>> getLectures(BuildContext context, AuthService _authService) async {
-  String url = 'https://802b-103-107-92-82.ngrok-free.app/lectures';
+  String url = 'https://d10c-103-103-56-94.ngrok-free.app/lectures';
   final prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('access_token');
   if (token == null) {

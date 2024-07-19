@@ -39,11 +39,10 @@ class _SignInDemoState extends State<SignInDemo> {
         await loginWithGoogle(account);
       }
     });
-    //_googleSignIn.signInSilently();
   }
 
   Future<void> getToken(String email) async {
-    String url = 'https://d171-103-107-92-82.ngrok-free.app/get_access_token?email=$email';
+    String url = 'https://d10c-103-103-56-94.ngrok-free.app/get_access_token?email=$email';
     try {
       final response = await http.get(
         Uri.parse(url),
@@ -69,12 +68,15 @@ class _SignInDemoState extends State<SignInDemo> {
 
   Future<void> loginWithGoogle(GoogleSignInAccount account) async {
     final GoogleSignInAuthentication auth = await account.authentication;
+    print(auth.idToken);
     final response = await http.post(
-      Uri.parse('https://802b-103-107-92-82.ngrok-free.app/google_auth'),
+      Uri.parse('https://d10c-103-103-56-94.ngrok-free.app/google_auth'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: '{"access_token": "${auth.idToken}"}',
+      body: jsonEncode({
+        'access_token': auth.idToken,
+      }),
     );
 
     if (response.statusCode == 200) {
@@ -119,8 +121,13 @@ class _SignInDemoState extends State<SignInDemo> {
       final GoogleSignInAccount? user = _currentUser;
       if (user != null) {
         return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            Container(
+              height: 300,
+              width: 300,
+              child: Image.asset('/Users/angie/StudioProjects/flutter_app/lib/images/google_login.png'),
+            ),
             ListTile(
               leading: GoogleUserCircleAvatar(identity: user),
               title: Text(user.displayName ?? ''),
@@ -136,8 +143,13 @@ class _SignInDemoState extends State<SignInDemo> {
         );
       } else {
         return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            Container(
+              height: 300,
+              width: 300,
+              child: Image.asset('/Users/angie/StudioProjects/flutter_app/lib/images/google_login.png'),
+            ),
             const Text('You are not currently signed in.'),
             SignInButton(
               Buttons.google,

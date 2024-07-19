@@ -1,20 +1,14 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/pages/Login_or_Register.dart';
 import 'package:flutter_app/pages/profile_info.dart';
-import 'package:flutter_app/pages/splash.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:flutter_app/pages/UserPages/UserHome.dart';
 import 'package:flutter_app/pages/UserPages/courses_page.dart';
 import 'package:flutter_app/pages/UserPages/profile_page.dart';
 import 'package:flutter_app/pages/UserPages/live_page.dart';
-import 'package:flutter_app/pages/login_page.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_app/pages/UserPages/profile_page.dart';
-
 import 'auth_helper.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,7 +44,7 @@ class _HomePageState extends State<HomePage> {
         throw Exception('No token found');
       }
       Response response = await post(
-        Uri.parse('https://802b-103-107-92-82.ngrok-free.app/logout'),
+        Uri.parse('https://d10c-103-103-56-94.ngrok-free.app/logout'),
         headers: {'Authorization': 'Bearer $token'},
       );
       if (response.statusCode == 200) {

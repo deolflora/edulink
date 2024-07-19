@@ -64,7 +64,7 @@ class _UserHomeState extends State<UserHome> {
   }
 
   Future<void> addFavCourse(Course selectedCourse) async {
-    String url = 'https://802b-103-107-92-82.ngrok-free.app/add_fav';
+    String url = 'https://d10c-103-103-56-94.ngrok-free.app/add_fav';
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('access_token');
 
@@ -90,7 +90,7 @@ class _UserHomeState extends State<UserHome> {
   }
 
   Future<void> removeFavCourse(Course selectedCourse) async {
-    String url = 'https://802b-103-107-92-82.ngrok-free.app/remove_fav';
+    String url = 'https://d10c-103-103-56-94.ngrok-free.app/remove_fav';
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('access_token');
 
@@ -157,7 +157,7 @@ class _UserHomeState extends State<UserHome> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('access_token');
     final response = await http.get(Uri.parse(
-        'https://802b-103-107-92-82.ngrok-free.app/search?query=$query'),
+        'https://d10c-103-103-56-94.ngrok-free.app/search?query=$query'),
       headers: {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
@@ -317,8 +317,6 @@ class _UserHomeState extends State<UserHome> {
                   ),
                   ]
                       ),
-
-
     );
 
   }

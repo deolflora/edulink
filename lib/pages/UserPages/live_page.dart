@@ -77,8 +77,8 @@ class _UserLiveState extends State<UserLive> {
                                 Color tileColor = index % 2 == 0 ? Colors.grey[200]! : Colors.white;
                                 String videoId = thumbnailID[index % thumbnailID.length];
                                 Lecture lecture = snapshot.data![index];
-                                String courseId = lecture.course_id ?? 'N/A';  // Provide default value
-                                String title = lecture.title ?? 'Untitled';  // Provide default value
+                                String courseId = lecture.course_id ?? 'N/A';
+                                String title = lecture.title ?? 'Untitled';
                                 return Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                   color: tileColor,
@@ -96,7 +96,6 @@ class _UserLiveState extends State<UserLive> {
                                         progressIndicatorColor: Colors.blueAccent,
                                       ),
                                       ListTile(
-                                          //title: Text("${snapshot.data![index].course_id}: ${snapshot.data![index].title}", textAlign: TextAlign.left,),
                                         title: Text("$courseId: $title", textAlign: TextAlign.left,),
                                           contentPadding: const EdgeInsets.only(bottom: 20.0),
                                         ),

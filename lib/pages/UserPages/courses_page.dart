@@ -9,7 +9,7 @@ import '../auth_helper.dart';
 import '../course.dart';
 
 Future<List<Course>> getFavCourses(BuildContext context, AuthService _authService) async {
-  String url = 'https://802b-103-107-92-82.ngrok-free.app/fav_courses';
+  String url = 'https://d10c-103-103-56-94.ngrok-free.app/fav_courses';
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('access_token');
   if (token == null) {
